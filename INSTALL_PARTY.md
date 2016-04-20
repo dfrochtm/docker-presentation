@@ -47,3 +47,10 @@ export no_proxy=localhost```
 - Ajouter la variable NO_PROXY pour exclure l'IP du docker host
     ```export NO_PROXY=$(echo $DOCKER_HOST | sed 's/tcp:\/\/\([^:]*\).*/\1/')```
     ```export no_proxy=$(echo $DOCKER_HOST | sed 's/tcp:\/\/\([^:]*\).*/\1/')```
+
+Pour ajouter la variable NO_PROXY pour exclure l'IP du docker host, je propose de mettre ceci dans un fichier sous /etc/profile.d :
+
+    ```$ cd /etc/profile.d```
+    ```$ cat docker.sh```
+    ```alias dm='docker-machine'```
+    ```alias proxies="no_proxy=$(echo $DOCKER_HOST | sed 's/tcp:\/\/\([^:]*\).*/\1/') ; NO_PROXY=$(echo $DOCKER_HOST | sed 's/tcp:\/\/\([^:]*\).*/\1/') ; export no_proxy NO_PROXY"```
